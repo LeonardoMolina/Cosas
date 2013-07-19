@@ -3,6 +3,9 @@ package com.leo.test.cosa;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
@@ -18,8 +21,12 @@ public class Game extends Canvas implements Runnable{
 	public static final int HEIGHT = WIDTH / 12 * 9;
 	public static final int SCALE = 3;
 	public static final String NAME = "Cositas";
+	public int tickCount = 0;
 	
 	private JFrame  frame;
+	
+	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
+	private int[] pixels = ((DataBufferInt)  image.getRaster().getDataBuffer()).getData();
 	
 	public Game() {
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE ));
@@ -35,7 +42,6 @@ public class Game extends Canvas implements Runnable{
 		frame.setVisible(true);
 		}
 
-	@Override
 	public void run() {
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D/60D;
@@ -55,6 +61,11 @@ public class Game extends Canvas implements Runnable{
 		    	delta -= 1;
 		    	shouldRender = true;
 		    }
+		    try {
+				Thread.sleep(2);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		    if (shouldRender) {
 		    	frames++;
 		    	render();
@@ -70,11 +81,17 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void tick(){
+		tickCount++;
 		
 	}
 	
 	public void render(){
-		
+		BufferStrategy bs = getBufferStrategy();
+		if (bs == null){
+			createBufferStrategy(3);
+			return;
+			
+		}
 	}
 
 	public static long getVersion() {
