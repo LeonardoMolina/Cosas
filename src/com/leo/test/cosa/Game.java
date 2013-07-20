@@ -2,7 +2,9 @@ package com.leo.test.cosa;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
@@ -19,8 +21,8 @@ public class Game extends Canvas implements Runnable{
 	private static final long Version = 1L;
 	public static final int WIDTH = 160;
 	public static final int HEIGHT = WIDTH / 12 * 9;
-	public static final int SCALE = 3;
-	public static final String NAME = "Cositas";
+	public static final int SCALE = 5;
+	public static final String NAME = "Nombre de Juego";
 	public int tickCount = 0;
 	
 	private JFrame  frame;
@@ -72,7 +74,7 @@ public class Game extends Canvas implements Runnable{
 		    }
 		    if (System.currentTimeMillis() - lastTimer > 1000){
 		    	lastTimer += 1000;
-		    	System.out.println("frames" + frames + ", " + "ticks" +  ticks);
+		    	System.out.println("Frames: " + frames + ", " + " Ticks: " +  ticks);
 		    	frames = 0;
 		    	ticks = 0;
 		    }
@@ -82,6 +84,9 @@ public class Game extends Canvas implements Runnable{
 	
 	public void tick(){
 		tickCount++;
+		for (int i = 0; i < pixels.length; i++){
+			pixels[i] = i + tickCount;
+		}
 		
 	}
 	
@@ -90,8 +95,13 @@ public class Game extends Canvas implements Runnable{
 		if (bs == null){
 			createBufferStrategy(3);
 			return;
-			
 		}
+		Graphics g = bs.getDrawGraphics();
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.dispose();
+		bs.show();
 	}
 
 	public static long getVersion() {
