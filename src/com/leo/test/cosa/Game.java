@@ -11,6 +11,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.leo.test.cosa.gfx.Screen;
 import com.leo.test.cosa.gfx.SpriteSheet;
 
 public class Game extends Canvas implements Runnable{
@@ -32,7 +33,7 @@ public class Game extends Canvas implements Runnable{
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)  image.getRaster().getDataBuffer()).getData();
 	
-	private SpriteSheet spriteSheet = new SpriteSheet("/back.png");
+	private Screen screen;
 	
 	public Game() {
 		setMinimumSize(new Dimension(WIDTH * SCALE, HEIGHT * SCALE ));
@@ -55,7 +56,8 @@ public class Game extends Canvas implements Runnable{
 		int frames = 0;
 		long lastTimer = 	System.currentTimeMillis();
 	    double delta = 0;	
-		
+	
+	init();
 	while (running) {
 		    long now = System.nanoTime();
 		    delta += (now - lastTime) / nsPerTick;
@@ -86,12 +88,12 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 	
+	public void init(){
+		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/back.png"));
+	}
+	
 	public void tick(){
 		tickCount++;
-		for (int i = 0; i < pixels.length; i++){
-			pixels[i] = i + tickCount;
-		}
-		
 	}
 	
 	public void render(){
@@ -100,6 +102,7 @@ public class Game extends Canvas implements Runnable{
 			createBufferStrategy(3);
 			return;
 		}
+		screen.render(pixels,0, WIDTH);
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
@@ -107,6 +110,8 @@ public class Game extends Canvas implements Runnable{
 		g.dispose();
 		bs.show();
 	}
+	
+	
 
 	public static long getVersion() {
 		return Version;
