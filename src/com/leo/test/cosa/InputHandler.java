@@ -27,7 +27,6 @@ public class InputHandler implements KeyListener{
 	}
 	
 	public List<Key> keys = new ArrayList<Key>();
-	
 	// -- Controls --
 	public Key up = new Key();
 	public Key down = new Key();
@@ -47,10 +46,10 @@ public class InputHandler implements KeyListener{
 	}
 	
 	public void toggleKey(int keyCode, boolean isPressed){
-		if (keyCode == KeyEvent.VK_W) {up.toggle(isPressed);}
-		if (keyCode == KeyEvent.VK_S) {down.toggle(isPressed);}
-		if (keyCode == KeyEvent.VK_A) {left.toggle(isPressed);}
-		if (keyCode == KeyEvent.VK_D) {right.toggle(isPressed);}			
+		if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {up.toggle(isPressed);}
+		if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {down.toggle(isPressed);}
+		if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {left.toggle(isPressed);}
+		if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {right.toggle(isPressed);}			
 	}
 	
 }

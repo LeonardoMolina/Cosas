@@ -1,0 +1,1 @@
+In this folder I will add a bunch of stuff needed to render the game such as player sprites, background images, sounds, etc.

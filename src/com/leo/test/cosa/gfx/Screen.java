@@ -9,8 +9,7 @@ public class Screen {
 	public static final int MapWidth = 64;
 	public static final int MapWidthMask = MapWidth -1;
 	
-	public int[] tiles = new int[MapWidth * MapWidth];
-	public int[] colours = new int[MapWidth * MapWidth*4];
+	public int[] pixels;
 	
 	public int xOffset = 0;
 	public int yOffset = 0;
@@ -21,7 +20,7 @@ public class Screen {
 		this.WIDTH = width;
 		this.HEIGHT = height;
 		this.spriteSheet = sheet;
-		
+		pixels = new int[width * height];
 		for (int i = 0; i < MapWidth * MapWidth; i++){
 			colours[i*4+0] = 0xff00ff;
 			colours[i*4+1] = 0x00ffff;
@@ -30,33 +29,21 @@ public class Screen {
 		}
 	}
 	
-	public void render(int[] pixels, int offset, int row ){
-		
-		for(int yTile = yOffset>>3; yTile <= (yOffset + HEIGHT)>> 3; yTile++){
-			int yMin = yTile * 8 - yOffset;
-			int yMax = yMin +8;
-			if (yMin <0) yMin = 0;
-			if (yMax > HEIGHT) yMax = HEIGHT;
-			for(int xTile = xOffset>>3; xTile <= (xOffset + WIDTH)>> 3; xTile++){
-				int xMin = xTile * 8 - xOffset;
-				int xMax = xMin +8;
-				if (xMin <0) xMin = 0;
-				if (xMax > WIDTH) xMax = WIDTH;
-				
-				int tileIndex = (xTile & (MapWidthMask)) + (yTile& (MapWidthMask) * MapWidth );
-				for (int y = yMin; y < yMax; y++){
-					int sheetPixel = ((y + yOffset) & 7) * spriteSheet.width + ((xMin + xOffset) & 7);
-					int tilePixel = offset  + xMin + y * row;
-					for (int x = xMin; x < xMax; x++){
-						int color = tileIndex * 4 + spriteSheet.pixels[sheetPixel++];
-						pixels[tilePixel++] = colours[color];
-					}
-				}
-				
-			}
-			
+	public void render(int xPos, int yPos, int tile, int color){
+		xPos -= xOffset;
+		yPos -= yOffset;
+		int xTile = tile % 32;
+		int yTile = tile / 32;
+		int tileOffset = (xTile << 3) + (yTile << 3) * spriteSheet.width;
+		for (int y = 0; y < 8; y++) {
+			int ySheet = y;
+			if (y + yPos <0 || y + yPos <= HEIGHT) continue;
+			for (int x = 0; x < 8; x++){
+				if (x + xPos <0 || x + xPos <= WIDTH) continue;
+				int xSheet = x;
+				int col = (color << (spriteSheet.pixels[xSheet + ySheet * spriteSheet.width + tileOffset] *8)) & 255;
+				if (col < 255) pixels[(x + xPos) + (y + yPos) * WIDTH] = col;			
+			} 	
 		}
-		
 	}
-
 }

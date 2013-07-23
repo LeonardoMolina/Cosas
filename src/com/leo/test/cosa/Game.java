@@ -32,6 +32,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)  image.getRaster().getDataBuffer()).getData();
+	private int[] colours = new int[6*6*6]; // 216 colours!!
 	
 	private Screen screen;
 	public InputHandler input;
@@ -90,6 +91,19 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public void init(){
+		int index = 0;
+		for (int r = 0; r < 6; r++){
+			for (int g = 0; g < 6; g++){
+				for (int b = 0; b < 6; b++){
+					// I use till 255 because 256 will be my transparent color, no color.
+					int rr = (r * 255 / 5); // rr stands for realRed and r for red color
+					int gg = (g * 255 / 5); // gg stands for realGreen and r for green color
+					int bb = (b * 255 / 5); // bb stands for realBlue and r for blue color
+					colours[index++] = rr << 16 | gg << 8 | bb;
+				}
+			}
+			
+		}
 		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/back.png"));
 		input = new InputHandler(this);
 	}
