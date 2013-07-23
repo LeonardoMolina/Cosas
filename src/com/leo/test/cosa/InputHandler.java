@@ -33,7 +33,6 @@ public class InputHandler implements KeyListener{
 	public Key left = new Key();
 	public Key right = new Key();
 	
-
 	public void keyTyped(KeyEvent e) {
 	}
 

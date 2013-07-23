@@ -58,7 +58,6 @@ public class Game extends Canvas implements Runnable{
 		int frames = 0;
 		long lastTimer = 	System.currentTimeMillis();
 	    double delta = 0;	
-	
 	init();
 	while (running) {
 		    long now = System.nanoTime();
@@ -86,7 +85,6 @@ public class Game extends Canvas implements Runnable{
 		    	frames = 0;
 		    	ticks = 0;
 		    }
-		    
 		}
 	}
 	
@@ -131,8 +129,6 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 	}
 	
-	
-
 	public static long getVersion() {
 		return Version;
 	}
