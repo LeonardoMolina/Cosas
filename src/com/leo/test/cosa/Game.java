@@ -11,6 +11,7 @@ import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
+import com.leo.test.cosa.gfx.Colours;
 import com.leo.test.cosa.gfx.Screen;
 import com.leo.test.cosa.gfx.SpriteSheet;
 
@@ -102,7 +103,7 @@ public class Game extends Canvas implements Runnable{
 			}
 			
 		}
-		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/back.png"));
+		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
 		input = new InputHandler(this);
 	}
 	
@@ -120,7 +121,19 @@ public class Game extends Canvas implements Runnable{
 			createBufferStrategy(3);
 			return;
 		}
-		screen.render(pixels,0, WIDTH);
+		
+		for (int y =0;  y < 32; y++){
+			for (int x =0;  x < 32; x++){
+				screen.render(x<<3, y<<3, 0, Colours.get(555, 500, 050, 005));
+			}
+		}
+		for (int y =0;  y < screen.height; y++){
+			for (int x =0;  x < screen.width; x++){
+				int colorCode = screen.pixels[x + y * screen.width];
+				if (colorCode < 255) pixels[x + y * WIDTH] = colours[colorCode];
+				
+			}
+		}
 		Graphics g = bs.getDrawGraphics();
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, getWidth(), getHeight());
