@@ -30,9 +30,9 @@ public class Screen {
 		int tileOffset = (xTile << 3) + (yTile << 3) * spriteSheet.width;
 		for (int y = 0; y < 8; y++) {
 			int ySheet = y;
-			if (y + yPos <0 || y + yPos <= height) continue;
+			if (y + yPos <0 || y + yPos >= height) continue;
 			for (int x = 0; x < 8; x++){
-				if (x + xPos <0 || x + xPos <= width) continue;
+				if (x + xPos <0 || x + xPos >= width) continue;
 				int xSheet = x;
 				int col = (color >> (spriteSheet.pixels[xSheet + ySheet * spriteSheet.width + tileOffset] *8)) & 255;
 				if (col < 255) pixels[(x + xPos) + (y + yPos) * width] = col;
