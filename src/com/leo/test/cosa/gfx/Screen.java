@@ -19,7 +19,6 @@ public class Screen {
 		this.height = height;
 		this.spriteSheet = sheet;
 		pixels = new int[width * height];
-
 	}
 	
 	public void render(int xPos, int yPos, int tile, int color){

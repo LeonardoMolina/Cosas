@@ -17,7 +17,7 @@ import com.leo.test.cosa.gfx.SpriteSheet;
 
 public class Game extends Canvas implements Runnable{
 	
-	/**
+	/**asd
 	 *  Jugando con Threads :D
 	 */
 	private static final long serialVersionUID = 1L;
@@ -112,7 +112,7 @@ public class Game extends Canvas implements Runnable{
 		if (input.up.isPressed()){screen.yOffset--;}
 		if (input.down.isPressed()){screen.yOffset++;}
 		if (input.left.isPressed()){screen.xOffset--;}
-		if (input.right.isPressed()){screen.xOffset--;}
+		if (input.right.isPressed()){screen.xOffset++;}
 	}
 	
 	public void render(){
