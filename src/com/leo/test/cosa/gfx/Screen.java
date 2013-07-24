@@ -43,4 +43,9 @@ public class Screen {
 			} 	
 		}
 	}
+	public void setOffset(int xOffset2, int yOffset2) {
+		this.xOffset = xOffset2;
+		this.yOffset = yOffset2;
+		
+	}
 }
