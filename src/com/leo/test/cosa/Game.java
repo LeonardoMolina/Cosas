@@ -106,8 +106,9 @@ public class Game extends Canvas implements Runnable{
 			
 		}
 		screen = new Screen(WIDTH, HEIGHT, new SpriteSheet("/sprite_sheet.png"));
-		input = new InputHandler(this);
 		level = new Level(64, 64);
+		input = new InputHandler(this);
+		
 	}
 	
 	private int x=0, y=0;
