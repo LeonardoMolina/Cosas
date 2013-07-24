@@ -12,6 +12,7 @@ import java.awt.image.DataBufferInt;
 import javax.swing.JFrame;
 
 import com.leo.test.cosa.gfx.Colours;
+import com.leo.test.cosa.gfx.Font;
 import com.leo.test.cosa.gfx.Screen;
 import com.leo.test.cosa.gfx.SpriteSheet;
 
@@ -124,9 +125,13 @@ public class Game extends Canvas implements Runnable{
 		
 		for (int y =0;  y < 32; y++){
 			for (int x =0;  x < 32; x++){
-				screen.render(x<<3, y<<3, 0, Colours.get(555, 500, 050, 005));
+				boolean flipY = y%2 == 0;
+				boolean flipx = x%2 == 0;
+				screen.render(x<<3, y<<3, 0, Colours.get(555, 505, 055, 550), flipx, flipY);
 			}
 		}
+		String msg = "MiraLAmierdaquehice";
+		Font.render(msg, screen, screen.xOffset + screen.width/2  - ((msg.length()*8)/2), screen.yOffset + screen.height/2, Colours.get(-1, -1, -1, 000));
 		for (int y =0;  y < screen.height; y++){
 			for (int x =0;  x < screen.width; x++){
 				int colorCode = screen.pixels[x + y * screen.width];
