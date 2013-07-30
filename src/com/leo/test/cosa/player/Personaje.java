@@ -7,13 +7,14 @@ public class Personaje {
 	private String nombre = "";
 	
 	// Stats ofensivos
-	private int minAttackDamage;
-	private int maxAttackDamage;
-	private int critPercent;
-	private int criticalDamage;
-	private int abilityPower;
-	private int magicPenetration;
-	private int armorPenetration;
+    private int MinAttackDamage;
+    private int MaxAttackDamage;
+    private int CriticalChance;
+    private int CriticalDamage;
+    private int CriticalMultiplier;
+    private int AbilityPower;
+    private int MagicPenetration;
+    private int ArmorPenetration;
 	
 	// Stats pasivos
 	private int hp;
@@ -32,15 +33,12 @@ public class Personaje {
 	private int attackSpeed;
 	private int range;
 	
-	// Stats defensivos
-	private int armor;
-	private int magicResistance;
-	private int dodge;
-	private int block;
-	private int blockWithShield;
-	private int parry;
-	
-	
+	  // Stats defensivos
+    private int armor;
+    private int MagicResistance;
+    private int dodge;
+    private int block;
+    private int parry;
 	
 	private String tipo;
 
