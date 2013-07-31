@@ -17,28 +17,28 @@ public class Personaje {
     private int ArmorPenetration;
 	
 	// Stats pasivos
-	private int hp;
-	private int currentHp;
-	private int rateHp;
-	private int mana;
-	private int currentMana;
-	private int rateSp;
-	private int energy;
-	private int currentEnegery;
-	private int rateEnegergy;
-	private int rage;
-	private int currentRage;
-	private int rateRage;
-	private int speed;
-	private int attackSpeed;
-	private int range;
+	private int Hp;
+	private int CurrentHp;
+	private int HpRate;
+	private int Mana;
+	private int CurrentMana;
+	private int ManaRate;
+	private int Energy;
+	private int CurrentEnergy;
+	private int EnergyRate;
+	private int Rage;
+	private int CurrentRage;
+	private int RageRate;
+	private int Apeed;
+	private int AttackSpeed;
+	private int Range;
 	
 	  // Stats defensivos
-    private int armor;
+    private int Armor;
     private int MagicResistance;
-    private int dodge;
-    private int block;
-    private int parry;
+    private int Dodge;
+    private int Block;
+    private int Parry;
 	
 	private String tipo;
 
